@@ -1,0 +1,68 @@
+{
+  "version": 2,
+  "skills": {
+    "deepgram-python-audio-intelligence": {
+      "source": "deepgram/deepgram-python-sdk",
+      "commit": "7bb602334316f6fa5ee02a4771ca77dc0e96514a",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/deepgram-python-audio-intelligence/SKILL.md",
+      "computedHash": "0bea291c2b23dbfedc29df7dc06c111fd0e0937b525931be6b43ad2a00964d84"
+    },
+    "deepgram-python-conversational-stt": {
+      "source": "deepgram/deepgram-python-sdk",
+      "commit": "7bb602334316f6fa5ee02a4771ca77dc0e96514a",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/deepgram-python-conversational-stt/SKILL.md",
+      "computedHash": "ee21b527ad65443145bec92eb78bce0105ec6416e12c35ac877e09f617edf3ba"
+    },
+    "deepgram-python-management-api": {
+      "source": "deepgram/deepgram-python-sdk",
+      "commit": "7bb602334316f6fa5ee02a4771ca77dc0e96514a",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/deepgram-python-management-api/SKILL.md",
+      "computedHash": "fb5cc862988aa62a5fa34063a49d43cc5f5e64fd81684281a2d6ebbe9286bfb5"
+    },
+    "deepgram-python-speech-to-text": {
+      "source": "deepgram/deepgram-python-sdk",
+      "commit": "7bb602334316f6fa5ee02a4771ca77dc0e96514a",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/deepgram-python-speech-to-text/SKILL.md",
+      "computedHash": "4771c105c3295948020fa4f602882a6d90f900ff1658159c6c70c724bfb55628"
+    },
+    "deepgram-python-text-intelligence": {
+      "source": "deepgram/deepgram-python-sdk",
+      "commit": "7bb602334316f6fa5ee02a4771ca77dc0e96514a",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/deepgram-python-text-intelligence/SKILL.md",
+      "computedHash": "819b0552a5fdb70aa6d8a59f24e4d40fb0fe7780e3ee42c6b9db52dd36653073"
+    },
+    "deepgram-python-text-to-speech": {
+      "source": "deepgram/deepgram-python-sdk",
+      "commit": "7bb602334316f6fa5ee02a4771ca77dc0e96514a",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/deepgram-python-text-to-speech/SKILL.md",
+      "computedHash": "85e1a26d376f9245f92d97cdf46c73439c1a431e43fbc21256b3aacc320e59e2"
+    },
+    "deepgram-python-voice-agent": {
+      "source": "deepgram/deepgram-python-sdk",
+      "commit": "7bb602334316f6fa5ee02a4771ca77dc0e96514a",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/deepgram-python-voice-agent/SKILL.md",
+      "computedHash": "e2f0fec43eb6010130a9a19a0ce8c606c84e02cdbf4fa30524cab26be4951ca4"
+    },
+    "supabase": {
+      "source": "supabase/agent-skills",
+      "commit": "c9be0e931b7930f7d02126d04774d904c381e7d7",
+      "sourceType": "github",
+      "skillPath": "skills/supabase/SKILL.md",
+      "computedHash": "2fbff32fd63b7d31585cacf0ed43e5bf8d05dd20d6c0c751d256cb967a00eec1"
+    },
+    "supabase-postgres-best-practices": {
+      "source": "supabase/agent-skills",
+      "commit": "c9be0e931b7930f7d02126d04774d904c381e7d7",
+      "sourceType": "github",
+      "skillPath": "skills/supabase-postgres-best-practices/SKILL.md",
+      "computedHash": "3eb972c2d7c818e544e35cc33ea8d7147d4d78ae08142ef40037b0fbac7a2505"
+    }
+  }
+}

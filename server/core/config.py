@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 from typing import Any
 from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -17,13 +18,30 @@ class Settings(BaseSettings):
     DEBUG: bool = True
     API_V1_STR: str = "/api/v1"
 
-    # Security
-    SECRET_KEY: str = "clario_development_secret_key_random_and_secure_for_dev_mode"
-    ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 days
+    # Database (PostgreSQL / Supabase)
+    DATABASE_URL: str = "postgresql+psycopg://postgres:postgres@localhost:5432/postgres"
 
-    # Database
-    DATABASE_URL: str = "sqlite:///./clario.db"
+    # Storage & Uploads
+    UPLOAD_DIR: str = "uploads"
+    # Supabase (Secret Key for server, Publishable Key for client)
+    SUPABASE_URL: str | None = None
+    SUPABASE_SECRET_KEY: str | None = None
+    SUPABASE_PUBLISHABLE_KEY: str | None = None
+    SUPABASE_JWT_SECRET: str | None = None  # Dashboard → Settings → API → JWT Secret
+    SUPABASE_STORAGE_BUCKET: str = "recordings"
+
+    @property
+    def supabase_secret(self) -> str | None:
+        return self.SUPABASE_SECRET_KEY
+
+    @property
+    def supabase_publishable(self) -> str | None:
+        return self.SUPABASE_PUBLISHABLE_KEY
+
+    # External AI APIs
+    DEEPGRAM_API_KEY: str | None = None
+    OPENAI_API_KEY: str | None = None
+    OPENAI_MODEL: str = "gpt-6-luna"
 
     # CORS
     BACKEND_CORS_ORIGINS: list[str] = ["*"]
@@ -41,6 +59,12 @@ class Settings(BaseSettings):
         if isinstance(v, list):
             return v
         return ["*"]
+
+    @property
+    def upload_path(self) -> Path:
+        p = Path(self.UPLOAD_DIR)
+        p.mkdir(parents=True, exist_ok=True)
+        return p
 
 
 settings = Settings()

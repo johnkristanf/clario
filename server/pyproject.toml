@@ -7,11 +7,19 @@ requires-python = ">=3.12"
 dependencies = [
     "alembic>=1.20.1",
     "bcrypt>=4.0.0",
+    "deepgram-sdk>=7.19.0",
     "fastapi>=0.163.2",
+    "httpx>=0.28.1",
+    "librosa>=1.0.1",
+    "numpy>=2.5.5",
+    "openai>=3.55.1",
+    "psycopg[binary]>=3.3.9",
     "pydantic>=2.14.3",
     "pydantic-settings>=2.16.3",
     "pyjwt>=2.15.1",
     "python-dotenv>=1.2.4",
+    "python-multipart>=0.0.34",
+    "soundfile>=0.14.0",
     "sqlalchemy>=2.1.9",
     "uvicorn[standard]>=0.54.0",
 ]
@@ -22,3 +30,7 @@ dev = [
     "pytest>=9.2.0",
     "pytest-asyncio>=1.5.0",
 ]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+asyncio_default_fixture_loop_scope = "function"
