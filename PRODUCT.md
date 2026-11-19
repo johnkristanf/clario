@@ -8,15 +8,15 @@ android
 
 ## Users
 
-Consumers seeking clarity, focus, and simplified daily routines. Individuals who want to capture thoughts, voice notes, and daily plans on-the-go without friction or cognitive overload.
+Individuals and professionals seeking to improve their spoken communication, clarify their thoughts, organize their ideas, and build speaking confidence through consistent daily articulation practice.
 
 ## Product Purpose
 
-Clario is an AI-powered voice assistant and smart dictation mobile app that helps users transform spoken thoughts into structured clarity, clear actions, and calm daily routines. Success means frictionless voice capture, rapid transcription with intelligent distillation, and low-stress organization that respects user attention.
+Clario is an AI-powered articulation tool that helps users to clarify thoughts, organize ideas, and speak confidently through consistent daily articulation practice. Success means frictionless voice recording, comprehensive multi-dimensional speech evaluation (acoustic analysis, transcription with filler word detection, and 7-dimension AI feedback), and actionable coaching that drives measurable communication growth.
 
 ## Positioning
 
-Unlike complex business transcription tools or cluttered productivity apps, Clario focuses on consumer mental clarity: one-tap spoken input, instant distillation into actionable thoughts and routines, and clean Material Design 3 ergonomics tailored for everyday Android users.
+Unlike passive dictation apps, generic voice memo recorders, or high-pressure public speaking courses, Clario acts as a private, low-friction articulation gym. Through structured daily practice topics, frameworks (PREP, STAR, Rule of Three), and holistic feedback covering both acoustic delivery and conceptual structure, Clario makes mastering articulation an achievable daily habit.
 
 ## Operating Context
 

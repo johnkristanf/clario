@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -8,100 +8,33 @@ import {
   Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { User, LogIn, LogOut, CheckCircle, Sliders, Shield } from 'lucide-react-native';
+import { router } from 'expo-router';
+import { User, LogOut, CheckCircle, Shield } from 'lucide-react-native';
 import { Colors, Spacing, Typography, MinTouchTarget } from '@/constants/theme';
-import { supabase, getOrCreateUserId } from '@/services/supabase';
-import { authService } from '@/services/api';
+import { useAuth } from '@/context/auth-context';
 
 export default function ProfileScreen() {
-  const [userId, setUserId] = useState<string>('');
-  const [userEmail, setUserEmail] = useState<string | null>(null);
-  const [userName, setUserName] = useState<string | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+  const { user, isAuthenticated, signOut } = useAuth();
 
-  useEffect(() => {
-    async function checkAuth() {
-      const uid = await getOrCreateUserId();
-      setUserId(uid);
-
-      const { data: userData } = await supabase.auth.getUser();
-      if (userData.user) {
-        setIsAuthenticated(true);
-        setUserEmail(userData.user.email || null);
-        setUserName(userData.user.user_metadata?.full_name || 'Clario Speaker');
-      }
-    }
-    checkAuth();
-
-    const { data: authListener } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      if (session?.user) {
-        setIsAuthenticated(true);
-        setUserEmail(session.user.email || null);
-        setUserName(session.user.user_metadata?.full_name || 'Clario Speaker');
-        setUserId(session.user.id);
-        await authService.syncGoogleUser({
-          user_id: session.user.id,
-          email: session.user.email || undefined,
-          full_name: session.user.user_metadata?.full_name || undefined,
-          avatar_url: session.user.user_metadata?.avatar_url || undefined,
-          access_token: session.access_token,
-        });
-      }
-    });
-
-    return () => {
-      authListener.subscription.unsubscribe();
-    };
-  }, []);
-
-  const handleGoogleSignIn = async () => {
-    try {
-      setLoading(true);
-      // Initiate Supabase Google OAuth
-      const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: 'clario://auth/callback',
-        },
-      });
-
-      if (error) {
-        // Fallback for development if OAuth redirect is not yet configured in cloud console
-        const demoEmail = `speaker_${userId.substring(0, 6)}@gmail.com`;
-        const demoName = 'Demo Speaker';
-        setUserEmail(demoEmail);
-        setUserName(demoName);
-        setIsAuthenticated(true);
-
-        await authService.syncGoogleUser({
-          user_id: userId,
-          email: demoEmail,
-          full_name: demoName,
-        });
-
-        Alert.alert('Google Sign-In Connected', `Signed in as ${demoEmail} via Supabase Auth.`);
-      } else if (data?.url) {
-        // In native Expo, WebBrowser or Linking handles the URL
-        Alert.alert('Sign-In Triggered', 'Proceed with Google authentication.');
-      }
-    } catch (err: any) {
-      Alert.alert('Sign-In', err.message || 'Authentication error.');
-    } finally {
-      setLoading(false);
-    }
-  };
+  const userName = user?.user_metadata?.full_name ?? 'Clario Speaker';
+  const userEmail = user?.email ?? null;
 
   const handleSignOut = async () => {
-    try {
-      await supabase.auth.signOut();
-      setIsAuthenticated(false);
-      setUserEmail(null);
-      setUserName(null);
-      Alert.alert('Signed Out', 'You are now practicing in guest mode.');
-    } catch {
-      // ignore
-    }
+    Alert.alert(
+      'Sign Out',
+      'Are you sure you want to sign out?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Sign Out',
+          style: 'destructive',
+          onPress: async () => {
+            await signOut();
+            router.replace('/login');
+          },
+        },
+      ]
+    );
   };
 
   return (
@@ -118,37 +51,19 @@ export default function ProfileScreen() {
             <User size={32} color={Colors.dark.text} />
           </View>
           <Text style={styles.profileName}>{userName || 'Clario Speaker'}</Text>
-          <Text style={styles.profileEmail}>{userEmail || `Guest Device ID: ${userId}`}</Text>
+          <Text style={styles.profileEmail}>{userEmail ?? 'No email'}</Text>
 
-          {isAuthenticated ? (
-            <View style={styles.verifiedBadge}>
-              <CheckCircle size={14} color={Colors.dark.success} />
-              <Text style={styles.verifiedText}>Google Account Synced</Text>
-            </View>
-          ) : (
-            <View style={styles.guestBadge}>
-              <Text style={styles.guestBadgeText}>Local Guest Mode</Text>
-            </View>
-          )}
+          <View style={styles.verifiedBadge}>
+            <CheckCircle size={14} color={Colors.dark.success} />
+            <Text style={styles.verifiedText}>Google Account Synced</Text>
+          </View>
         </View>
 
-        {/* Authentication Action */}
-        {!isAuthenticated ? (
-          <TouchableOpacity
-            style={styles.googleButton}
-            activeOpacity={0.8}
-            onPress={handleGoogleSignIn}
-            disabled={loading}
-          >
-            <LogIn size={20} color={Colors.dark.background} />
-            <Text style={styles.googleButtonText}>Sign in with Google</Text>
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity style={styles.signOutButton} activeOpacity={0.8} onPress={handleSignOut}>
-            <LogOut size={18} color={Colors.dark.danger} />
-            <Text style={styles.signOutText}>Sign Out</Text>
-          </TouchableOpacity>
-        )}
+        {/* Sign Out */}
+        <TouchableOpacity style={styles.signOutButton} activeOpacity={0.8} onPress={handleSignOut}>
+          <LogOut size={18} color={Colors.dark.danger} />
+          <Text style={styles.signOutText}>Sign Out</Text>
+        </TouchableOpacity>
 
         {/* System Settings & Engine Status */}
         <View style={styles.sectionCard}>

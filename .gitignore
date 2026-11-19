@@ -45,3 +45,5 @@ yarn-error.*
 # System files
 .DS_Store
 Thumbs.db
+
+uploads

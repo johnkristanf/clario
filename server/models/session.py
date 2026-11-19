@@ -1,5 +1,5 @@
 import uuid
-from sqlalchemy import Float, ForeignKey, Integer, String, Text
+from sqlalchemy import Float, ForeignKey, Index, Integer, String, Text, text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from db.base import Base, TimestampMixin
@@ -7,6 +7,9 @@ from db.base import Base, TimestampMixin
 
 class PracticeSession(Base, TimestampMixin):
     __tablename__ = "practice_sessions"
+    __table_args__ = (
+        Index("idx_practice_sessions_created_at", text("created_at desc")),
+    )
 
     id: Mapped[str] = mapped_column(String(64), primary_key=True, default=lambda: str(uuid.uuid4()))
     user_id: Mapped[str] = mapped_column(String(64), ForeignKey("users.id", ondelete="CASCADE"), index=True, nullable=False)

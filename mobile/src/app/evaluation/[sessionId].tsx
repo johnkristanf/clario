@@ -50,7 +50,7 @@ export default function EvaluationScreen() {
     loadData();
 
     return () => {
-      audioService.stopSound().catch(() => {});
+      audioService.stopSound();
     };
   }, [sessionId]);
 

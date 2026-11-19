@@ -1,5 +1,7 @@
 # Clario Monorepo
 
+> AI-powered articulation tool that helps users to clarify thoughts, organize ideas, and speak confidently through consistent daily articulation practice.
+
 Monorepo for the **Clario** mobile application and Python backend service.
 
 ## Structure

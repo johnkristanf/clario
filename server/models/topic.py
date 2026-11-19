@@ -15,6 +15,6 @@ class Topic(Base, TimestampMixin):
     prep_time_seconds: Mapped[int] = mapped_column(Integer, default=30)
     speaking_time_seconds: Mapped[int] = mapped_column(Integer, default=120)
     suggested_framework: Mapped[str | None] = mapped_column(String(128), default="PREP Framework")
-    is_active: Mapped[bool] = mapped_column(Boolean, default=True)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True, index=True)
 
     sessions: Mapped[list["PracticeSession"]] = relationship("PracticeSession", back_populates="topic")  # noqa: F821

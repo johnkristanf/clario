@@ -58,7 +58,7 @@ export default function SessionScreen() {
       if (prepIntervalRef.current) clearInterval(prepIntervalRef.current);
       if (speakingIntervalRef.current) clearInterval(speakingIntervalRef.current);
       audioService.stopRecording().catch(() => {});
-      audioService.stopSound().catch(() => {});
+      audioService.stopSound();
     };
   }, []);
 
